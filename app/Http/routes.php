@@ -29,3 +29,14 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::get('pelanggan', 'PelangganController@index');
+Route::get('pelanggan/{id}', 'PelangganController@show');
+Route::get('/create-pelanggan', function () {
+    return view('partials.create');
+});
+Route::post('pelanggan', 'PelangganController@store');
+Route::put('update-pelanggan/{id}', 'PelangganController@update');
+Route::get('hapus-pelanggan/{id}', 'PelangganController@destroy');
+Route::get('edit-pelanggan/{id}', 'PelangganController@edit');
+Route::post('create-pelanggan', 'PelangganController@create');
