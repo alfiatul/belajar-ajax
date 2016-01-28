@@ -12,6 +12,9 @@
                 <div class="panel-heading">
                     <h1>Data Pelanggan</h1>
                 </div>
+                <button type="button" class="btn btn-outline btn-info"
+                        onclick="location.href='/create-pelanggan';">Add
+                </button>
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
                         @if (count($pelanggan) > 0)
@@ -44,14 +47,13 @@
                                             <button type="button" class="btn btn-outline btn-danger"
                                                     onclick="location.href='/hapus-pelanggan/{{$data->id}}';">Delete
                                             </button>
-                                            <button type="button" class="btn btn-outline btn-info"
-                                                    onclick="location.href='/create-pelanggan';">Add
-                                            </button>
+
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+
                         @endif
                     </div>
                 </div>

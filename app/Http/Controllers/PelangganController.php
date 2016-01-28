@@ -19,14 +19,14 @@ class PelangganController extends Controller
 
     public function index($limit = 10)
     {
-        return view('partials.pelanggan', [
+        return view('partials.pelanggan.pelanggan', [
             'pelanggan' => $this->pelanggan->getByPage($limit),
         ]);
 
     }
         public function edit($id)
     {
-        return view('partials.edit', [
+        return view('partials.pelanggan.edit', [
             'data' =>$this->pelanggan->find($id),
         ]);
 
@@ -40,7 +40,7 @@ class PelangganController extends Controller
 
     public function show($id)
     {
-        return view('partials.detail', [
+        return view('partials.pelanggan.detail', [
             'data' => $this->pelanggan->find($id),
         ]);
     }
