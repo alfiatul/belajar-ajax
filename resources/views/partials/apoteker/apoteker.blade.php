@@ -1,11 +1,12 @@
 @extends('layouts.master')
 @section('title', 'Page Title')
 @section('content')
-
+    <body onload="Index()">
     <div class="row">
         <div class="col-lg-12">
         </div>
     </div>
+    <div id="Index">
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -13,7 +14,7 @@
                     <h1>Data Apoteker</h1>
                 </div>
                 <button type="button" class="btn btn-outline btn-info"
-                        onclick="location.href='/create-apoteker';">Add
+                        onclick="Create()">Add
                 </button>
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
@@ -37,13 +38,13 @@
                                         <td>{{ $data->notel }}</td>
                                         <td>
                                             <button type="button" class="btn btn-outline btn-primary"
-                                                    onclick="location.href='/apoteker/{{$data->id}}';">Detail
+                                                    onclick="location.href='/apoteker/{{ $data->id }}';">Detail
                                             </button>
                                             <button type="button" class="btn btn-outline btn-info"
-                                                    onclick="location.href='/edit-apoteker/{{$data->id}}';">Edit
+                                                    onclick="Edit({{ $data->id }})">Edit
                                             </button>
                                             <button type="button" class="btn btn-outline btn-danger"
-                                                    onclick="location.href='/hapus-apoteker/{{$data->id}}';">Delete
+                                                    id="Delete" onclick="Hapus({{ $data->id }})">Delete
                                             </button>
 
                                         </td>
@@ -60,5 +61,178 @@
             <!-- /.panel -->
         </div>
     </div>
+    </div>
+    <div id="Create">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Tambah Data Apoteker
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form id="Form-Create">
+                                    <div class="form-group">
+                                        <label>Nama</label>
+                                        <label>:</label>
+                                        <input type="text" class="form-control" name="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Alamat</label>
+                                        <label>:</label>
+                                        <input type="text" class="form-control" name="alamat">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Jenis Kelamin</label>
+                                        <label>:</label>
+                                        <input type="text" class="form-control" name="Jk">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>No Telpon</label>
+                                        <label>:</label>
+                                        <input type="text" class="form-control" name="notel">
+                                    </div>
+                                    <div class="form-group">
+
+                                        <input class="btn btn-outline btn-info" type="submit" value="Simpan">
+                                        {{--onclick="location.href='/apoteker/{{ $data->id }}}';">Simpan--}}
+                                        <button type="button" class="btn btn-outline btn-primary"
+                                                onclick="Index()">Kembali
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+        </div>
+    </div>
+    <div id="Edit">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Edit Data Apoteker #
+                    </div>
+                    <div class="panel-body">
+                        {{--<form role="form">--}}
+                        @if (count($data) > 0)
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form id="Form-Edit">
+                                        <div class="form-group">
+                                            <label>Nama</label>
+                                            <label>:</label>
+                                            <input type="text" name="name" class="form-control" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Alamat</label>
+                                            <label>:</label>
+                                            <input type="text" name="alamat" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Jenis Kelamin</label>
+                                            <label>:</label>
+                                            <input type="text" name="Jk" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>No Telpon</label>
+                                            <label>:</label>
+                                            <input type="text" name="notel" class="form-control" >
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-outline btn-info">Simpan
+                                            </button>
+                                            <button type="button" class="btn btn-outline btn-primary"
+                                                    onclick="Index()">Kembali
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        @endif
+                        {{--</form>--}}
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <script src="{!! asset('bower_components/jquery/dist/jquery.min.js') !!}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#from-Create").submit(function (event){
+
+                event.preventDefault();
+                var $from = $(this),
+                        Nama = $from.find("input[name='name']").val(),
+                        Alamat = $from.find("input[name='alamat']").val(),
+                        Jenis_Kelamin = $from.find("input[name='Jk']").val(),
+                        No_Telpon = $from.find("input[name='notel']").val();
+                //   $("From-Create").reset();
+
+                var posting = $.post('/apoteker', {
+                    Nama : name,
+                    Alamat : alamat,
+                    Jenis_Kelamin : Jk,
+                    No_Telpon : notel,
+                });
+
+                //Put the results in a div
+                posting.done(function (data){
+                    //console.log(data);
+                    window.altert(data.result.message);
+                    document.getElementById("From-Create").reset();
+                    location.reload();
+                    $('#Create').hide();
+                    $('#Edit').hide();
+                    $('#apoteker').show();
+                });
+        });
+        });
+
+
+        function Index(){
+            $('#Create').hide();
+            $('#Edit').hide();
+            $('#Index').show();
+        }
+        function Create(){
+            $('#Create').show();
+            $('#Edit').hide();
+            $('#Index').hide();
+        }
+        function Edit(){
+            $('#Create').hide();
+            $('#Edit').show();
+            $('#Index').hide();
+        }
+
+        function hapus(id){
+            var result = confirm("Apakah Anda Yankin Ingin Menghapus ?");
+            if (result){
+                $.ajax({
+                            method : "Delete",
+                            url: '/apoteker/' + id,
+                            data: {}
+                        })
+
+                        .done(function (data) {
+                            window.alert(data.result.message);
+                            location.reload();
+                        });
+
+            }
+        }
+
+    </script>
+    </body>
     <!-- /.row -->
 @endsection
