@@ -45,15 +45,17 @@ class PelangganController extends Controller
 
     public function show($id)
     {
-        return view('partials.pelanggan.detail', [
-            'data' => $this->pelanggan->find($id),
-        ]);
+//        return view('partials.pelanggan.detail', [
+//            'data' => $this->pelanggan->find($id),
+//        ]);
+        return $this->pelanggan->find($id);
     }
+
 
     public function update($id, Request $request)
     {
         $this->pelanggan->update($id, $request->all());
-        return redirect('/pelanggan');
+    //    return redirect('/pelanggan');
     }
 
     public function destroy($id)

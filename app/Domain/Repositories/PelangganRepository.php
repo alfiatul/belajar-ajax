@@ -49,9 +49,9 @@ class PelangganRepository extends AbstractRepository implements Crudable, Pagina
 
     public function delete($id)
     {
-        parent::delete($id);
+return parent::delete($id);
 
-        return redirect('/pelanggan');
+//        return redirect('/pelanggan');
     }
 
     public function search($query)

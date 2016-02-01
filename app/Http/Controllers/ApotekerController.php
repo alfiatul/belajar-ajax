@@ -38,21 +38,22 @@ class ApotekerController extends Controller
 
     public function store(Request $request)
     {
-        $this->apoteker->create($request->all());
-        return redirect('/apoteker');
+        return $this->apoteker->create($request->all());
+
     }
 
     public function show($id)
     {
-        return view('partials.apoteker.detail', [
-            'data' => $this->apoteker->find($id),
-        ]);
+        //return view('partials.apoteker.detail', [
+//            'data' => $this->apoteker->find($id),
+//        ]);
+        return $this->apoteker->find($id);
     }
 
     public function update($id, Request $request)
     {
-        $this->apoteker->update($id, $request->all());
-        return redirect('/apoteker');
+      return  $this->apoteker->update($id, $request->all());
+//        return redirect('/apoteker');
     }
 
     public function destroy($id)

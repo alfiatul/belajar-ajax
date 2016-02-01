@@ -7,19 +7,19 @@
         </div>
     </div>
     <div id="Index">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h1>Data Apoteker</h1>
-                </div>
-                <button type="button" class="btn btn-outline btn-info"
-                        onclick="Create()">Add
-                </button>
-                <div class="panel-body">
-                    <div class="dataTable_wrapper">
-                        @if (count($apoteker) > 0)
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+s        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Data Apoteker</h1>
+                    </div>
+                    <button type="button" class="btn btn-outline btn-info"
+                            onclick="Create()">Add
+                    </button>
+                    <div class="panel-body">
+                        <div class="dataTable_wrapper">
+                            {{--                        @if (count($apoteker) > 0)--}}
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>Nama</th>
@@ -29,38 +29,39 @@
                                     <th>Aksi</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                @foreach ($apoteker as $data)
-                                    <tr class="">
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->alamat }}</td>
-                                        <td>{{ $data->Jk }}</td>
-                                        <td>{{ $data->notel }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-outline btn-primary"
-                                                    onclick="location.href='/apoteker/{{ $data->id }}';">Detail
-                                            </button>
-                                            <button type="button" class="btn btn-outline btn-info"
-                                                    onclick="Edit({{ $data->id }})">Edit
-                                            </button>
-                                            <button type="button" class="btn btn-outline btn-danger"
-                                                    id="Delete" onclick="Hapus({{ $data->id }})">Delete
-                                            </button>
+                                <tbody id="tampildata">
 
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                {{--@foreach ($apoteker as $data)--}}
+                                {{--<tr class="">--}}
+                                {{--<td>{{ $data->name }}</td>--}}
+                                {{--<td>{{ $data->alamat }}</td>--}}
+                                {{--<td>{{ $data->Jk }}</td>--}}
+                                {{--<td>{{ $data->notel }}</td>--}}
+                                {{--<td>--}}
+                                {{--<button type="button" class="btn btn-outline btn-primary"--}}
+                                {{--onclick="location.href='/apoteker/{{ $data->id }}';">Detail--}}
+                                {{--</button>--}}
+                                {{--<button type="button" class="btn btn-outline btn-info"--}}
+                                {{--onclick="Edit({{ $data->id }})">Edit--}}
+                                {{--</button>--}}
+                                {{--<button type="button" class="btn btn-outline btn-danger"--}}
+                                {{--id="Delete" onclick="Hapus({{ $data->id }})">Delete--}}
+                                {{--</button>--}}
+
+                                {{--</td>--}}
+                                {{--</tr>--}}
+                                {{--@endforeach--}}
                                 </tbody>
                             </table>
 
-                        @endif
+                            {{--@endif--}}
+                        </div>
                     </div>
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel-body -->
+                <!-- /.panel -->
             </div>
-            <!-- /.panel -->
         </div>
-    </div>
     </div>
     <div id="Create">
         <div class="row">
@@ -121,14 +122,13 @@
                     </div>
                     <div class="panel-body">
                         {{--<form role="form">--}}
-                        @if (count($data) > 0)
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form id="Form-Edit">
                                         <div class="form-group">
                                             <label>Nama</label>
                                             <label>:</label>
-                                            <input type="text" name="name" class="form-control" >
+                                            <input type="text" name="name" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Alamat</label>
@@ -143,7 +143,7 @@
                                         <div class="form-group">
                                             <label>No Telpon</label>
                                             <label>:</label>
-                                            <input type="text" name="notel" class="form-control" >
+                                            <input type="text" name="notel" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-outline btn-info">Simpan
@@ -155,7 +155,6 @@
                                     </form>
                                 </div>
                             </div>
-                        @endif
                         {{--</form>--}}
                     </div>
                     <!-- /.panel-body -->
@@ -167,59 +166,113 @@
     </div>
     <script src="{!! asset('bower_components/jquery/dist/jquery.min.js') !!}"></script>
     <script>
-        $(document).ready(function(){
-            $("#from-Create").submit(function (event){
+        $(document).ready(function () {
+            $('#Create').hide();
+            $('#Edit').hide();
+            getAjax();
+            $("#Form-Create").submit(function (event) {
 
                 event.preventDefault();
-                var $from = $(this),
-                        Nama = $from.find("input[name='name']").val(),
-                        Alamat = $from.find("input[name='alamat']").val(),
-                        Jenis_Kelamin = $from.find("input[name='Jk']").val(),
-                        No_Telpon = $from.find("input[name='notel']").val();
+                var $form = $(this),
+                        Nama = $form.find("input[name='name']").val(),
+                        Alamat = $form.find("input[name='alamat']").val(),
+                        Jenis_Kelamin = $form.find("input[name='Jk']").val(),
+                        No_Telpon = $form.find("input[name='notel']").val();
                 //   $("From-Create").reset();
 
                 var posting = $.post('/apoteker', {
-                    Nama : name,
-                    Alamat : alamat,
-                    Jenis_Kelamin : Jk,
-                    No_Telpon : notel,
+                    name: Nama,
+                    alamat: Alamat,
+                    Jk: Jenis_Kelamin,
+                    notel: No_Telpon
                 });
 
                 //Put the results in a div
-                posting.done(function (data){
+                posting.done(function (data) {
                     //console.log(data);
-                    window.altert(data.result.message);
+                    window.alert(data.result.message);
                     document.getElementById("From-Create").reset();
                     location.reload();
                     $('#Create').hide();
                     $('#Edit').hide();
                     $('#apoteker').show();
                 });
-        });
+            });
         });
 
 
-        function Index(){
+        function Index() {
             $('#Create').hide();
             $('#Edit').hide();
             $('#Index').show();
         }
-        function Create(){
+        function Create() {
             $('#Create').show();
             $('#Edit').hide();
             $('#Index').hide();
         }
-        function Edit(){
+
+        function getAjax() {
+            $("#tampildata").children().remove();
+            $.getJSON("/data-apoteker", function (data) {
+                $.each(data.slice(0, 9), function (i, data) {
+                    $("#tampildata").append("<tr><td>" + data.name + "</td><td>" + data.alamat + "</td><td>" + data.Jk + "</td><td>" + data.notel + "</td><td><button type='button' class='btn btn-outline btn-info' onclick='Edit(" + data.id + ")'>Edit</button><button type='button' class='btn btn-outline btn-danger' onclick='Hapus(" + data.id + ")'>Delete</button></td></tr>");
+                })
+            });
+        }
+        function Edit(id) {
             $('#Create').hide();
             $('#Edit').show();
             $('#Index').hide();
+            $.ajax({
+                        method: "Get",
+                        url: '/apoteker/' + id,
+                        data: {}
+                    })
+                    .done(function (data) {
+                        console.log(data.judul);
+                        //var $form = $(this),
+                        Nama = $("input[name='name']").val(data.name);
+                        Alamat = $("input[name='alamat']").val(data.alamat);
+                        Jenis_kelamin = $("input[name='Jk']").val(data.Jk);
+                        No_Telpon = $("input[name='notel']").val(data.notel);
+
+                        $('##Edit').show();
+                    });
+
+            $("Form-Edit").submit(function (event) {
+                event.preventDefault();
+                var $form = $(this),
+                        Nama = $form.find("input[name='name']").val(),
+                        Alamat = $form.find("input[name='alamat']").val(),
+                        Jenis_Kelamin = $form.find("input[name='Jk']").val(),
+                        No_Telpon = $form.find("input[name='notel']").val();
+
+                $.ajax({
+                            method: "PUT",
+                            url: '/apoteker/' + id,
+                            data: {
+                                Nama: name,
+                                Alamat: alamat,
+                                Jenis_Kelamin: Jk,
+                                NO_telpon: notel
+                            }
+                        })
+
+                        .done(function (data) {
+                            window.alert(data.result.message);
+                            getAjax();
+                            Index();
+                        });
+
+            });
         }
 
-        function hapus(id){
+        function hapus(id) {
             var result = confirm("Apakah Anda Yankin Ingin Menghapus ?");
-            if (result){
+            if (result) {
                 $.ajax({
-                            method : "Delete",
+                            method: "Delete",
                             url: '/apoteker/' + id,
                             data: {}
                         })
