@@ -52,7 +52,8 @@
                             </div>
                         </div>
                     @endif
-                    {{--</form>--}}                </div>
+                    {{--</form>--}}
+                </div>
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->

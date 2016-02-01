@@ -23,7 +23,10 @@ class ApotekerController extends Controller
         return view('partials.apoteker.apoteker', [
             'apoteker' => $this->apoteker->getByPage($limit),
         ]);
-
+    }
+    public function getData($limit = 10)
+    {
+        return $this->apoteker->getData();
     }
     public function edit($id)
     {

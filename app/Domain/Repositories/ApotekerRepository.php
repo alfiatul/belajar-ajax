@@ -61,4 +61,10 @@ class ApotekerRepository extends AbstractRepository implements Crudable, Paginab
     {
         return parent::getByPage($limit, $columns);
     }
+
+    public function getData()
+    {
+        $data = $this->model->get();
+            return $data;
+    }
 }

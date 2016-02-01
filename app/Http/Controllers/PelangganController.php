@@ -22,8 +22,13 @@ class PelangganController extends Controller
         return view('partials.pelanggan.pelanggan', [
             'pelanggan' => $this->pelanggan->getByPage($limit),
         ]);
-
     }
+
+    public function getData($limit = 10)
+    {
+        return $this->pelanggan->getData();
+    }
+
         public function edit($id)
     {
         return view('partials.pelanggan.edit', [
