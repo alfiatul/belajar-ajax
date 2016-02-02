@@ -13,9 +13,9 @@ class ApotekerController extends Controller
 {
     protected $apoteker;
 
-    public function __construct(ApotekerRepository $apoteker)
+    public function __construct(ApotekerRepository $apotekerRepository)
     {
-        $this->apoteker = $apoteker;
+        $this->apoteker = $apotekerRepository;
     }
 
     public function index($limit = 10)

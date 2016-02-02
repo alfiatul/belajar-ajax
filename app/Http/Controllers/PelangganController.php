@@ -39,8 +39,8 @@ class PelangganController extends Controller
 
     public function store(Request $request)
     {
-        $this->pelanggan->create($request->all());
-        return redirect('/pelanggan');
+return        $this->pelanggan->create($request->all());
+//        return redirect('/pelanggan');
     }
 
     public function show($id)
@@ -54,7 +54,7 @@ class PelangganController extends Controller
 
     public function update($id, Request $request)
     {
-        $this->pelanggan->update($id, $request->all());
+     return   $this->pelanggan->update($id, $request->all());
     //    return redirect('/pelanggan');
     }
 

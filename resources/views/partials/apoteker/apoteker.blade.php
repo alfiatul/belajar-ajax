@@ -146,8 +146,8 @@
                                             <input type="text" name="notel" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-outline btn-info">Simpan
-                                            </button>
+                                            <input type="submit" class="btn btn-outline btn-info" value="simpan">
+
                                             <button type="button" class="btn btn-outline btn-primary"
                                                     onclick="Index()">Kembali
                                             </button>
@@ -174,17 +174,17 @@
 
                 event.preventDefault();
                 var $form = $(this),
-                        Nama = $form.find("input[name='name']").val(),
-                        Alamat = $form.find("input[name='alamat']").val(),
-                        Jenis_Kelamin = $form.find("input[name='Jk']").val(),
-                        No_Telpon = $form.find("input[name='notel']").val();
+                        name = $form.find("input[name='name']").val(),
+                        alamat = $form.find("input[name='alamat']").val(),
+                        Jk = $form.find("input[name='Jk']").val(),
+                        notel = $form.find("input[name='notel']").val();
                 //   $("From-Create").reset();
 
                 var posting = $.post('/apoteker', {
-                    name: Nama,
-                    alamat: Alamat,
-                    Jk: Jenis_Kelamin,
-                    notel: No_Telpon
+                    name: name,
+                    alamat: alamat,
+                    Jk: Jk,
+                    notel:notel
                 });
 
                 //Put the results in a div
@@ -234,30 +234,30 @@
                     .done(function (data) {
                         console.log(data.judul);
                         //var $form = $(this),
-                        Nama = $("input[name='name']").val(data.name);
-                        Alamat = $("input[name='alamat']").val(data.alamat);
-                        Jenis_kelamin = $("input[name='Jk']").val(data.Jk);
-                        No_Telpon = $("input[name='notel']").val(data.notel);
+                        name = $("input[name='name']").val(data.name);
+                        alamat = $("input[name='alamat']").val(data.alamat);
+                        Jk = $("input[name='Jk']").val(data.Jk);
+                        notel = $("input[name='notel']").val(data.notel);
 
                         $('#Edit').show();
                     });
 
-            $("Form-Edit").submit(function (event) {
+            $("#Form-Edit").submit(function (event) {
                 event.preventDefault();
                 var $form = $(this),
-                        Nama = $form.find("input[name='name']").val(),
-                        Alamat = $form.find("input[name='alamat']").val(),
-                        Jenis_Kelamin = $form.find("input[name='Jk']").val(),
-                        No_Telpon = $form.find("input[name='notel']").val();
+                        name = $form.find("input[name='name']").val(),
+                        alamat = $form.find("input[name='alamat']").val(),
+                        Jk = $form.find("input[name='Jk']").val(),
+                        notel = $form.find("input[name='notel']").val();
 
                 $.ajax({
                             method: "PUT",
                             url: '/apoteker/' + id,
                             data: {
-                                Nama: name,
-                                Alamat: alamat,
-                                Jenis_Kelamin: Jk,
-                                NO_telpon: notel
+                                name: name,
+                                alamat: alamat,
+                                Jk: Jk,
+                                notel: notel
                             }
                         })
 

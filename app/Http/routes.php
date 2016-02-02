@@ -36,7 +36,7 @@ Route::get('/create-pelanggan', function () {
     return view('partials.pelanggan.create');
 });
 Route::post('pelanggan', 'PelangganController@store');
-Route::put('update-pelanggan/{id}', 'PelangganController@update');
+Route::put('pelanggan/{id}', 'PelangganController@update');
 Route::get('hapus-pelanggan/{id}', 'PelangganController@destroy');
 Route::get('edit-pelanggan/{id}', 'PelangganController@edit');
 Route::post('create-pelanggan', 'PelangganController@create');
@@ -50,7 +50,7 @@ Route::get('/create-apoteker', function () {
     return view('partials.apoteker.create');
 });
 Route::post('apoteker', 'ApotekerController@store');
-Route::put('update-apoteker/{id}', 'ApotekerController@update');
+Route::put('apoteker/{id}', 'ApotekerController@update');
 Route::get('hapus-apoteker/{id}', 'ApotekerController@destroy');
 Route::get('edit-apoteker/{id}', 'ApotekerController@edit');
 Route::post('create-apoteker', 'ApotekerController@create');

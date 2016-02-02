@@ -98,7 +98,6 @@
                                     <div class="form-group">
 
                                         <input class="btn btn-outline btn-info" type="submit" value="Simpan">
-                                        {{--onclick="location.href='/apoteker/{{ $data->id }}}';">Simpan--}}
                                         <button type="button" class="btn btn-outline btn-primary"
                                                 onclick="Index()">Kembali
                                         </button>
@@ -152,8 +151,8 @@
                                         <input type="text" name="notel" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-outline btn-info">Simpan
-                                        </button>
+                                        <input type="submit" class="btn btn-outline btn-info" value="Simpan">
+
                                         <button type="button" class="btn btn-outline btn-primary"
                                                 onclick="Index()">Kembali
                                         </button>
@@ -180,19 +179,19 @@
 
                 event.preventDefault();
                 var $form = $(this),
-                        Nama = $form.find("input[name='name']").val(),
-                        Alamat = $form.find("input[name='alamat']").val(),
-                        No_Antrian = $form.find("input [name='noantrian']").val(),
-                        Jenis_Kelamin = $form.find("input[name='Jk']").val(),
-                        No_Telpon = $form.find("input[name='notel']").val();
+                        name = $form.find("input[name='name']").val(),
+                        alamat = $form.find("input[name='alamat']").val(),
+                        noantrian = $form.find("input[name='noantrian']").val(),
+                        Jk = $form.find("input[name='Jk']").val(),
+                        notel = $form.find("input[name='notel']").val();
                 //   $("From-Create").reset();
 
                 var posting = $.post('/pelanggan', {
-                    name: Nama,
-                    alamat: Alamat,
-                    noantrian: No_Antrian,
-                    Jk: Jenis_Kelamin,
-                    notel: No_Telpon
+                    name: name,
+                    alamat: alamat,
+                    noantrian: noantrian,
+                    Jk: Jk,
+                    notel: notel
                 });
 
                 //Put the results in a div
@@ -242,32 +241,33 @@
                     .done(function (data) {
                         console.log(data.judul);
                         //var $form = $(this),
-                        Nama = $("input[name='name']").val(data.name);
-                        Alamat = $("input[name='alamat']").val(data.alamat);
-                        No_Antrian = $("input[name='noantrian']").val(data.noantrian);
-                        Jenis_kelamin = $("input[name='Jk']").val(data.Jk);
-                        No_Telpon = $("input[name='notel']").val(data.notel);
+                        name = $("input[name='name']").val(data.name);
+                        alamat = $("input[name='alamat']").val(data.alamat);
+                        noantrian = $("input[name='noantrian']").val(data.noantrian);
+                        Jk = $("input[name='Jk']").val(data.Jk);
+                        notel = $("input[name='notel']").val(data.notel);
 
-                        $('##Edit').show();
+                        $('#Edit').show();
                     });
-            $("Form-Edit").submit(function (event) {
+            $("#Form-Edit").submit(function (event) {
+
                 event.preventDefault();
                 var $form = $(this),
-                        Nama = $form.find("input[name='name']").val(),
-                        Alamat = $form.find("input[name='alamat']").val(),
-                        No_Antrian = $form.find("input[name='noantrian']").val(),
-                        Jenis_Kelamin = $form.find("input[name='Jk']").val(),
-                        No_Telpon = $form.find("input[name='notel']").val();
+                        name = $form.find("input[name='name']").val(),
+                        alamat = $form.find("input[name='alamat']").val(),
+                        noantrian = $form.find("input[name='noantrian']").val(),
+                        Jk = $form.find("input[name='Jk']").val(),
+                        notel = $form.find("input[name='notel']").val();
 
                 $.ajax({
                             method: "PUT",
                             url: '/pelanggan/' + id,
                             data: {
-                                Nama: name,
-                                Alamat: alamat,
-                                No_Antrian: noantrian,
-                                Jenis_Kelamin: Jk,
-                                NO_telpon: notel
+                                name: name,
+                                alamat: alamat,
+                                noantrian: noantrian,
+                                Jk: Jk,
+                                notel: notel
                             }
                         })
 
