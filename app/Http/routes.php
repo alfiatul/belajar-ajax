@@ -41,7 +41,7 @@ Route::get('hapus-pelanggan/{id}', 'PelangganController@destroy');
 Route::get('edit-pelanggan/{id}', 'PelangganController@edit');
 Route::post('create-pelanggan', 'PelangganController@create');
 Route::get('data-pelanggan', 'pelangganController@getData');
-
+Route::delete('pelanggan/{id}','PelangganController@destroy');
 
 
 Route::get('apoteker', 'ApotekerController@index');
@@ -55,3 +55,4 @@ Route::get('hapus-apoteker/{id}', 'ApotekerController@destroy');
 Route::get('edit-apoteker/{id}', 'ApotekerController@edit');
 Route::post('create-apoteker', 'ApotekerController@create');
 Route::get('data-apoteker', 'ApotekerController@getData');
+Route::delete('apoteker/{id}','ApotekerController@destroy');

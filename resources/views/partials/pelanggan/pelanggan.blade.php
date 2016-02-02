@@ -14,7 +14,7 @@
                     <h1>Data Pelanggan</h1>
                 </div>
                 <button type="button" class="btn btn-outline btn-info"
-                        onclick="location.href='/create-pelanggan';">Add
+                        onclick="Create()">Add
                 </button>
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
@@ -187,7 +187,7 @@
                         No_Telpon = $form.find("input[name='notel']").val();
                 //   $("From-Create").reset();
 
-                var posting = $.post('/apoteker', {
+                var posting = $.post('/pelanggan', {
                     name: Nama,
                     alamat: Alamat,
                     noantrian: No_Antrian,
@@ -199,11 +199,8 @@
                 posting.done(function (data) {
                     //console.log(data);
                     window.alert(data.result.message);
-                    document.getElementById("From-Create").reset();
-                    location.reload();
-                    $('#Create').hide();
-                    $('#Edit').hide();
-                    $('#apoteker').show();
+                    getAjax();
+                    Index();
                 });
             });
         });
@@ -218,6 +215,11 @@
             $('#Create').show();
             $('#Edit').hide();
             $('#Index').hide();
+            $("input[name='name']").val("");
+            $("input[name='alamat']").val("");
+            $("input[name='noantrian']").val("");
+            $("input[name='Jk']").val("");
+            $("input[name='notel']").val("");
         }
 
         function getAjax() {
@@ -278,18 +280,18 @@
             });
         }
 
-        function hapus(id) {
+        function Hapus(id) {
             var result = confirm("Apakah Anda Yankin Ingin Menghapus ?");
             if (result) {
                 $.ajax({
-                            method: "Delete",
+                            method: "DELETE",
                             url: '/pelanggan/' + id,
                             data: {}
                         })
 
                         .done(function (data) {
                             window.alert(data.result.message);
-                            location.reload();
+                            getAjax();
                         });
 
             }

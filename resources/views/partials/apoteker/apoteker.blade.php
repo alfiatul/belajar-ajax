@@ -7,7 +7,7 @@
         </div>
     </div>
     <div id="Index">
-s        <div class="row">
+       <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -191,11 +191,8 @@ s        <div class="row">
                 posting.done(function (data) {
                     //console.log(data);
                     window.alert(data.result.message);
-                    document.getElementById("From-Create").reset();
-                    location.reload();
-                    $('#Create').hide();
-                    $('#Edit').hide();
-                    $('#apoteker').show();
+                    getAjax();
+                    Index();
                 });
             });
         });
@@ -210,6 +207,11 @@ s        <div class="row">
             $('#Create').show();
             $('#Edit').hide();
             $('#Index').hide();
+            $("input[name='name']").val("");
+            $("input[name='alamat']").val("");
+            $("input[name='Jk']").val("");
+            $("input[name='notel']").val("");
+
         }
 
         function getAjax() {
@@ -237,7 +239,7 @@ s        <div class="row">
                         Jenis_kelamin = $("input[name='Jk']").val(data.Jk);
                         No_Telpon = $("input[name='notel']").val(data.notel);
 
-                        $('##Edit').show();
+                        $('#Edit').show();
                     });
 
             $("Form-Edit").submit(function (event) {
@@ -268,18 +270,18 @@ s        <div class="row">
             });
         }
 
-        function hapus(id) {
+        function Hapus(id) {
             var result = confirm("Apakah Anda Yankin Ingin Menghapus ?");
             if (result) {
                 $.ajax({
-                            method: "Delete",
+                            method: "DELETE",
                             url: '/apoteker/' + id,
                             data: {}
                         })
 
                         .done(function (data) {
                             window.alert(data.result.message);
-                            location.reload();
+                            getAjax();
                         });
 
             }

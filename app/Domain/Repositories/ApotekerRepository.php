@@ -47,9 +47,9 @@ class ApotekerRepository extends AbstractRepository implements Crudable, Paginab
 
     public function delete($id)
     {
-        parent::delete($id);
+      return  parent::delete($id);
 
-        return redirect('/apoteker');
+       // return redirect('/apoteker');
     }
 
     public function search($query)
