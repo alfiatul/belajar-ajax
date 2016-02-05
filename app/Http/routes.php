@@ -56,3 +56,17 @@ Route::get('edit-apoteker/{id}', 'ApotekerController@edit');
 Route::post('create-apoteker', 'ApotekerController@create');
 Route::get('data-apoteker', 'ApotekerController@getData');
 Route::delete('apoteker/{id}','ApotekerController@destroy');
+
+
+Route::get('obat', 'ObatController@index');
+Route::get('obat/{id}', 'ObatController@show');
+Route::get('/create-obat', function () {
+    return view('partials.obat.create');
+});
+Route::post('obat', 'ObatController@store');
+Route::put('obat/{id}', 'ObatController@update');
+Route::get('hapus-obat/{id}', 'ObatController@destroy');
+Route::get('edit-obat/{id}', 'ObatController@edit');
+Route::post('create-obat', 'ObatController@create');
+Route::get('data-obat', 'ObatController@getData');
+Route::delete('obat/{id}','ObatController@destroy');
